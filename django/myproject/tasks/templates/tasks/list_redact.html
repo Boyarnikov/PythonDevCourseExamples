@@ -1,0 +1,24 @@
+{% extends 'tasks/base.html' %}
+
+{% block title %}
+Task view
+{% endblock %}
+
+{% block content %}
+<h1> This is a list redaction page for list {{list.name}} </h1>
+<form method="post" action="" class="form_del">
+    {% csrf_token %}
+
+    {% for task in list.task_set.all %}
+        <li> <button name="del{{task.id}}" type="submin"> X </button> {{task.name}}: {{task.description}} </li>
+    {% endfor %}
+</form>
+
+<form method="post" action="" class="form_group">
+    {% csrf_token %}
+    <button name="button" type="submin"> PRESS ME </button>
+    {{new_task_form.name}}
+    {{new_task_form.description}}
+</form>
+
+{% endblock %}

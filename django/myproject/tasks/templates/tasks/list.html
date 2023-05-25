@@ -1,0 +1,17 @@
+{% extends 'tasks/base.html' %}
+
+{% block title %}
+Task view
+{% endblock %}
+
+{% block content %}
+<h1> This is a list view for list {{list.name}} </h1>
+
+
+{% for task in list.task_set.all %}
+    <li> {{task.name}}: {{task.description}} </li>
+{% endfor %}
+
+<a href="http://127.0.0.1:8000/tasks/{{list.id}}/redact"> РЕДАКТИРОВАТЬ </a>
+
+{% endblock %}
