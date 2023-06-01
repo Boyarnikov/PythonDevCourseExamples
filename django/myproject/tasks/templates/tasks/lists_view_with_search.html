@@ -1,0 +1,61 @@
+{% extends 'tasks/base.html' %}
+
+{% block title %}
+Task view
+{% endblock %}
+
+{% block content %}
+<h1> All task lists with search: </h1>
+
+<input id="search_here" class="form-control mb-3", placeholder="Type smf to start search..."/>
+
+<div id="box">
+    <ul class="list-group">
+        {% for l in object_list %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{{l.id}}">  {{l.name}} </a>
+          <span class="badge badge-primary badge-pill">0</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
+
+
+{% block scrypts %}
+<script>
+    console.log("update")
+    
+    const data_temp = '{{qs_json}}'
+    const data_temp2 = JSON.parse(data_temp.replace(/&quot;/g, '"'))
+    console.log(data_temp2)
+
+    let data = []
+
+    const input = document.getElementById("search_here")
+    console.log(input)
+
+    input.addEventListener('keyup', (e)=>{
+        data = data_temp2.filter(list => (list["name"].includes(e.target.value)))
+        console.log(data)
+
+        if (data.length > 0) {
+          box.innerHTML = '<ul class="list-group">'
+          data.map(list => {
+            box.innerHTML += '<li class="list-group-item d-flex justify-content-between align-items-center">' +
+                              '<a href=' + list.id + '> ' + list.name + '</a>' +
+                              '<span class="badge badge-primary badge-pill">' +list.size+'</span>' + 
+                              '</li>'
+          })
+          box.innerHTML += '</ul>'
+        }
+        else {
+            box.innerHTML = "No resoults found..."
+        }
+
+
+    }
+    )
+</script>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'tasks/base.html' %}
+
+{% block title %}
+Task view
+{% endblock %}
+
+{% block content %}
+<h1> All task lists: </h1>
+
+<ul class="list-group">
+    {% for l in lists %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="{{l.l.id}}">  {{l.l.name}} </a>
+      <span class="badge badge-primary badge-pill">{{l.size}}</span>
+    </li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}
+
+

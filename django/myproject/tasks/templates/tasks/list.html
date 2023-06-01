@@ -7,11 +7,20 @@ Task view
 {% block content %}
 <h1> This is a list view for list {{list.name}} </h1>
 
+    <ul class="list-group">
+        <li class="list-group-item active">{{list.name}}</li>
+        {% for task in list.task_set.all %}
+            <li class="list-group-item"><b>{{task.name}}</b>: {{task.description}} </li>
+        {% endfor %}
+    </ul>
 
-{% for task in list.task_set.all %}
-    <li> {{task.name}}: {{task.description}} </li>
-{% endfor %}
 
 <a href="http://127.0.0.1:8000/tasks/{{list.id}}/redact"> РЕДАКТИРОВАТЬ </a>
 
+{% endblock %}
+
+{% block scrypts %}
+<script> 
+    console.log("initiated")
+</script>
 {% endblock %}

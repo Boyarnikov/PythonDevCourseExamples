@@ -6,19 +6,25 @@ Task view
 
 {% block content %}
 <h1> This is a list redaction page for list {{list.name}} </h1>
+
 <form method="post" action="" class="form_del">
     {% csrf_token %}
-
-    {% for task in list.task_set.all %}
-        <li> <button name="del{{task.id}}" type="submin"> X </button> {{task.name}}: {{task.description}} </li>
-    {% endfor %}
+    <ul class="list-group">
+        <li class="list-group-item active">{{list.name}}</li>
+        {% for task in list.task_set.all %}
+            
+            <li class="list-group-item"><button name="del{{task.id}}" type="submin" class="btn btn-outline-danger"> X </button> <b>{{task.name}}</b>: {{task.description}} </li>
+        {% endfor %}
+    </ul>
 </form>
 
 <form method="post" action="" class="form_group">
     {% csrf_token %}
-    <button name="button" type="submin"> PRESS ME </button>
+    <div style="padding: 10px 10px 10px 10px;">
+    <button name="button" type="submin"> Создать новое задание </button>
     {{new_task_form.name}}
     {{new_task_form.description}}
+    </div>
 </form>
 
 {% endblock %}

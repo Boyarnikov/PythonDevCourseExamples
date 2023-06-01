@@ -2,8 +2,9 @@ from . import views
 from django.urls import path
 
 urlpatterns = [
-    path('<int:id>/<int:id2>', views.index_with_two_id),
-    path('<int:id>/redact', views.redact_task),
-    path('<int:id>', views.index_with_id),
-    path('', views.index),
+    path('tasks/<int:id>/redact', views.redact_task),
+    path('tasks/<int:id>', views.index_with_id),
+    path('tasks/search', views.SearchTasks.as_view(), name="search-view"),
+    path('tasks/', views.view_lists),
+    path('', views.rederect_to_list)
 ]
